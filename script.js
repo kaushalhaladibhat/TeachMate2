@@ -10,7 +10,7 @@ function sendLocalNotif(title,body,tag){if(notifPermission!=="granted")return;tr
 function checkExamReminders(){if(notifPermission!=="granted")return;const td=todayStr();exams.forEach(e=>{const d=Math.ceil((new Date(e.date)-Date.now())/864e5);if(d===1)sendLocalNotif("📝 Exam Tomorrow!",e.subject+" exam tomorrow",`exam-${e.id}`);else if(d===0)sendLocalNotif("📝 Exam Today!",e.subject+" exam is today!",`exam-today-${e.id}`)})}
 let lastAlertCount=0;
 function checkNewAlerts(){if(notifPermission!=="granted")return;if(alerts.length>lastAlertCount&&lastAlertCount>0){const newest=alerts[0];sendLocalNotif("🔔 "+newest.title,newest.message||"",`alert-${newest.id}`)}lastAlertCount=alerts.length}
-const GEMINI_KEY="AIzaSyAoo5BLmrxa8YK6gRhP5QIXjTFzECUxIj8";
+const GEMINI_KEY="AIzaSyBmJEyzImpjgI13xzTqAKqdw3TVZZJKJxk";
 const ADMIN_EMAILS=["kaushalllsharma24@gmail.com"];
 const isAdmin=e=>e&&ADMIN_EMAILS.includes(e.toLowerCase());
 const DEFAULT_CLASSES=[];for(let i=1;i<=10;i++){DEFAULT_CLASSES.push(i+"A",i+"B")}DEFAULT_CLASSES.push("11A","12A");
