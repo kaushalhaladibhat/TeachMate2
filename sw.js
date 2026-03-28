@@ -1,9 +1,9 @@
 const CACHE_NAME = 'teachmate-v1';
-const OFFLINE_URL = '/index.html';
+const OFFLINE_URL = '/TeachMate2/index.html';
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll([OFFLINE_URL, '/teachmate-icon.png']))
+    caches.open(CACHE_NAME).then(cache => cache.addAll([OFFLINE_URL, '/TeachMate2/teachmate-icon.png']))
   );
   self.skipWaiting();
 });
@@ -28,7 +28,7 @@ self.addEventListener('notificationclick', event => {
   event.waitUntil(
     self.clients.matchAll({ type: 'window' }).then(clients => {
       if (clients.length) clients[0].focus();
-      else self.clients.openWindow('/index.html');
+      else self.clients.openWindow('/TeachMate2/index.html');
     })
   );
 });
