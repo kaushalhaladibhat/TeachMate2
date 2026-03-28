@@ -2,10 +2,10 @@
 firebase.initializeApp({apiKey:"AIzaSyBg4lX_8ZMKSjdbzdV5dI1_dZOipJ56MK0",authDomain:"teachmate12.firebaseapp.com",databaseURL:"https://teachmate12-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"teachmate12",storageBucket:"teachmate12.firebasestorage.app",messagingSenderId:"216135007161",appId:"1:216135007161:web:d00a41bfca86b776e41468"});
 const auth=firebase.auth(),db=firebase.database(),storage=firebase.storage(),googleProvider=new firebase.auth.GoogleAuthProvider();
 // Service Worker & Notifications
-if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{})}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('/TeachMate2/sw.js').catch(()=>{})}
 let notifPermission=Notification.permission||"default";
 function requestNotifPermission(){if('Notification' in window&&notifPermission!=="granted"){Notification.requestPermission().then(p=>{notifPermission=p;localStorage.setItem("tm_notif",p)})}}
-function sendLocalNotif(title,body,tag){if(notifPermission!=="granted")return;try{if(navigator.serviceWorker&&navigator.serviceWorker.controller){navigator.serviceWorker.ready.then(reg=>{reg.showNotification(title,{body,icon:"/teachmate-icon.png",tag:tag||"tm-"+Date.now(),badge:"/teachmate-icon.png"})})}else{new Notification(title,{body,icon:"/teachmate-icon.png"})}}catch(e){}}
+function sendLocalNotif(title,body,tag){if(notifPermission!=="granted")return;try{if(navigator.serviceWorker&&navigator.serviceWorker.controller){navigator.serviceWorker.ready.then(reg=>{reg.showNotification(title,{body,icon:"/TeachMate2/teachmate-icon.png",tag:tag||"tm-"+Date.now(),badge:"/TeachMate2/teachmate-icon.png"})})}else{new Notification(title,{body,icon:"/TeachMate2/teachmate-icon.png"})}}catch(e){}}
 // Check exams for reminders
 function checkExamReminders(){if(notifPermission!=="granted")return;const td=todayStr();exams.forEach(e=>{const d=Math.ceil((new Date(e.date)-Date.now())/864e5);if(d===1)sendLocalNotif("📝 Exam Tomorrow!",e.subject+" exam tomorrow",`exam-${e.id}`);else if(d===0)sendLocalNotif("📝 Exam Today!",e.subject+" exam is today!",`exam-today-${e.id}`)})}
 let lastAlertCount=0;
